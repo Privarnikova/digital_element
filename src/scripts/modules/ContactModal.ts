@@ -19,8 +19,6 @@ export class ContactModal {
 
   private readonly successState: HTMLElement;
 
-  private readonly contactForm: ContactForm;
-
   private resetTimer: number | null = null;
 
   public constructor() {
@@ -35,7 +33,7 @@ export class ContactModal {
     this.formState = queryRequired<HTMLElement>("[data-modal-state=\"form\"]", root);
     this.successState = queryRequired<HTMLElement>("[data-modal-state=\"success\"]", root);
 
-    this.contactForm = new ContactForm({
+    new ContactForm({
       formSelector: "#contact-form",
       endpoint: ENDPOINT,
       onSuccess: () => {

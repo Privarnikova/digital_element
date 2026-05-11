@@ -9,15 +9,18 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{ts,js}\"",
-    "lint:fix": "eslint \"src/**/*.{ts,js}\" --fix"
+    "lint:fix": "eslint \"src/**/*.{ts,js}\" --fix",
+    "deploy": "npm run build && npx gh-pages -d dist"
   },
   "devDependencies": {
     "@delement/eslint-config-master": "^1.2.0",
     "@stylistic/eslint-plugin": "^5.10.0",
+    "@types/node": "^25.6.2",
     "@typescript-eslint/eslint-plugin": "^8.59.2",
     "@typescript-eslint/parser": "^8.59.2",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.39.4",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.47",
     "postcss-import": "^16.1.0",
     "postcss-nested": "^7.0.2",
