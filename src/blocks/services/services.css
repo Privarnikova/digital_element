@@ -1,0 +1,203 @@
+.services {
+  background-color: var(--color-bg);
+  padding: 80px 0 140px;
+}
+
+.services__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 80px;
+  align-items: start;
+}
+
+.services__column {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.services__column--left .services__card {
+  margin-left: auto;
+}
+
+.services__header {
+  margin-bottom: 32px;
+  max-width: 360px;
+}
+
+.services__title {
+  font-family: var(--font-base);
+  font-size: 2.25rem;
+  font-weight: var(--fw-semibold);
+  color: #316099;
+  line-height: 1.278;
+  letter-spacing: 0.05em;
+}
+
+.services__card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 36px;
+  width: 380px;
+  max-width: 100%;
+  border-radius: 10px;
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-card);
+  text-align: left;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.services__card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-strong);
+}
+
+.services__card--offset-md {
+  margin-top: 72px;
+}
+
+.services__card--offset-lg {
+  margin-top: 144px;
+}
+
+/*
+ * Иллюстрация — обычный элемент потока:
+ * margin: 0 auto центрует, отрицательный margin-top
+ * нужен только для service-product, чтобы её верх торчал
+ * над краем карточки (как на макете).
+ */
+.services__illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin: 0 auto 8px;
+  pointer-events: none;
+}
+
+.services__illustration-image {
+  display: block;
+}
+
+/* service-product: 224×197, выходит за верхний край карточки */
+.services__card:has([src$="service-product.svg"]) .services__illustration {
+  margin-top: -76px;
+}
+
+.services__card:has([src$="service-product.svg"]) .services__illustration-image {
+  width: 224px;
+  height: 197px;
+}
+
+/* service-business: 182×132, целиком внутри карточки */
+.services__card:has([src$="service-business.svg"]) .services__illustration-image {
+  width: 182px;
+  height: 132px;
+}
+
+/* service-illustration: 156×131, целиком внутри карточки */
+.services__card:has([src$="service-illustration.svg"]) .services__illustration-image {
+  width: 156px;
+  height: 131px;
+}
+
+.services__name {
+  font-family: var(--font-base);
+  font-size: var(--fs-20);
+  font-weight: var(--fw-semibold);
+  color: var(--color-heading);
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+}
+
+.services__text {
+  font-size: var(--fs-16);
+  color: rgba(31, 63, 104, 0.6);
+  line-height: 1.625;
+  letter-spacing: 0.05em;
+}
+
+.services__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  line-height: 2.143;
+  color: var(--color-primary);
+  letter-spacing: 0.05em;
+  transition: gap var(--duration-base) var(--ease-out);
+}
+
+.services__more:hover {
+  gap: 16px;
+}
+
+.services__more-icon {
+  width: 18px;
+  height: 14px;
+}
+
+@media (max-width: 1023px) {
+  .services {
+    padding: 64px 0 100px;
+  }
+
+  .services__layout {
+    grid-template-columns: 1fr;
+    gap: 64px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .services__column {
+    gap: 64px;
+    width: 100%;
+  }
+
+  .services__column--left .services__card,
+  .services__column--right .services__card {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .services__card {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .services__card--offset-md,
+  .services__card--offset-lg {
+    margin-top: 0;
+  }
+
+  .services__header {
+    max-width: none;
+    margin-bottom: 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .services {
+    padding: 40px 0 80px;
+  }
+
+  .services__column {
+    gap: 48px;
+  }
+
+  .services__card {
+    padding: 28px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .services__card {
+    padding: 24px 20px;
+  }
+}

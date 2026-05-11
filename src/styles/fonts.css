@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "Galien";
+  src: url("../assets/fonts/galien-font-family/TRYGalien-Bold-BF677df6aa2fd8a.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("../assets/fonts/Gilroy-Regular_0.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("../assets/fonts/Gilroy-Medium_0.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("../assets/fonts/Gilroy-Semibold_0.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("../assets/fonts/Gilroy-Bold_0.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
