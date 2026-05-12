@@ -1,70 +1,60 @@
-import { FormSender } from "./FormSender.js";
-import { FormValidator } from "./FormValidator.js";
-import type { IFieldRule, IFormPayload } from "../types/index.js";
+import type {
+  IFormSender,
+  IFormValidator,
+  TFormPayload,
+} from "../types/index.js";
 import { queryRequired } from "../utils/dom.js";
-import { EMAIL_PATTERN, NAME_PATTERN } from "../utils/validators.js";
 
 const SUBMIT_DISABLED_CLASS = "form__submit--disabled";
 
-const FIELD_RULES: ReadonlyArray<IFieldRule> = [
-  {
-    name: "name",
-    required: true,
-    minLength: 2,
-    maxLength: 60,
-    pattern: NAME_PATTERN,
-    requiredMessage: "Please enter your name",
-    message: "Use letters, spaces and hyphens (2 to 60 characters)",
-  },
-  {
-    name: "email",
-    required: true,
-    pattern: EMAIL_PATTERN,
-    requiredMessage: "Please enter your email",
-    message: "Looks like an invalid email address",
-  },
-  {
-    name: "message",
-    required: true,
-    minLength: 10,
-    maxLength: 2000,
-    requiredMessage: "Please add a message",
-    message: "Message should be 10 to 2000 characters",
-  },
-];
-
-interface IContactFormOptions {
-  readonly formSelector: string;
-  readonly endpoint: string;
-  readonly onSuccess: (payload: IFormPayload) => void;
+/**
+ * Опции конструктора `ContactForm`.
+ *
+ * Валидатор и отправщик передаются снаружи (инверсия зависимостей):
+ * сам класс не знает, какие именно реализации стоят за ними.
+ */
+export interface IContactFormOptions<TPayload extends TFormPayload> {
+  readonly form: HTMLFormElement;
+  readonly validator: IFormValidator;
+  readonly sender: IFormSender<TPayload>;
+  readonly onSuccess: (payload: TPayload) => void;
   readonly onError?: (error: Error) => void;
 }
 
 /**
- * Координирует валидатор и отправщик формы.
- * Не использует сторонние библиотеки и нативные browser-tooltips.
+ * Координирует жизненный цикл формы: валидация → сбор payload → отправка.
+ *
+ * Класс не создаёт зависимости сам, а принимает их через конструктор,
+ * что делает его независимым от конкретных реализаций валидатора и
+ * отправщика — любой класс, удовлетворяющий `IFormValidator`/`IFormSender`,
+ * подходит без правок этого файла.
  */
-export class ContactForm {
+export class ContactForm<TPayload extends TFormPayload = TFormPayload> {
 
   private readonly form: HTMLFormElement;
 
   private readonly submitButton: HTMLButtonElement;
 
-  private readonly validator: FormValidator;
+  private readonly validator: IFormValidator;
 
-  private readonly sender: FormSender;
+  private readonly sender: IFormSender<TPayload>;
 
-  private readonly onSuccess: (payload: IFormPayload) => void;
+  private readonly onSuccess: (payload: TPayload) => void;
 
   private readonly onError: ((error: Error) => void) | undefined;
 
   private isSubmitting = false;
 
-  public constructor(options: IContactFormOptions) {
-    this.form = queryRequired<HTMLFormElement>(options.formSelector);
+  /**
+   * Привязывает форму к инжектированным валидатору и отправщику.
+   *
+   * @param options Форма и инжектированные зависимости (валидатор, отправщик, колбэки).
+   */
+  public constructor(options: IContactFormOptions<TPayload>) {
+    this.form = options.form;
     this.submitButton = queryRequired<HTMLButtonElement>("button[type=\"submit\"]", this.form);
-    this.validator = new FormValidator(this.form, FIELD_RULES);
-    this.sender = new FormSender({ endpoint: options.endpoint });
+    this.validator = options.validator;
+    this.sender = options.sender;
     this.onSuccess = options.onSuccess;
     this.onError = options.onError;
 
@@ -73,6 +63,9 @@ export class ContactForm {
     this.form.addEventListener("submit", this.handleSubmit);
   }
 
+  /**
+   * Сбрасывает значения и состояние ошибок формы.
+   */
   public reset(): void {
     this.form.reset();
     this.validator.reset();

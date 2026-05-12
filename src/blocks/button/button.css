@@ -21,69 +21,69 @@
     border-color var(--duration-base) var(--ease-out);
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-}
 
-.button:active {
-  transform: translateY(1px);
-}
+  &:active {
+    transform: translateY(1px);
+  }
 
-.button--primary {
-  background-color: var(--color-primary);
-  color: var(--color-text-on-blue);
-}
+  &--primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-blue);
 
-.button--primary:hover {
-  background-color: var(--color-primary-hover);
-  box-shadow: var(--shadow-button);
-}
+    &:hover {
+      background-color: var(--color-primary-hover);
+      box-shadow: var(--shadow-button);
+    }
+  }
 
-.button--ghost {
-  background-color: transparent;
-  color: var(--color-primary);
-  border: 1px solid var(--color-primary);
-}
+  &--ghost {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
 
-.button--ghost:hover {
-  background-color: var(--color-primary-soft);
-}
+    &:hover {
+      background-color: var(--color-primary-soft);
+    }
+  }
 
-.button--on-blue {
-  background-color: #5A98D0;
-  color: var(--color-text-on-blue);
-}
+  &--on-blue {
+    background-color: #5a98d0;
+    color: var(--color-text-on-blue);
 
-.button--on-blue:hover {
-  background-color: var(--color-primary-hover);
-  box-shadow: var(--shadow-button);
-}
+    &:hover {
+      background-color: var(--color-primary-hover);
+      box-shadow: var(--shadow-button);
+    }
+  }
 
-.button--block {
-  width: 100%;
-}
+  &--block {
+    width: 100%;
+  }
 
-.button--lg {
-  padding: 20px 44px;
-  font-size: var(--fs-16);
-}
+  &--lg {
+    padding: 20px 44px;
+    font-size: var(--fs-16);
+  }
 
-.button--sm {
-  padding: 10px 22px;
-  font-size: var(--fs-13);
-}
+  &--sm {
+    padding: 10px 22px;
+    font-size: var(--fs-13);
+  }
 
-.button__icon {
-  width: 18px;
-  height: 18px;
-  transition: transform var(--duration-base) var(--ease-out);
-}
+  &__icon {
+    width: 18px;
+    height: 18px;
+    transition: transform var(--duration-base) var(--ease-out);
+  }
 
-.button:hover .button__icon {
-  transform: translateX(4px);
-}
+  &:hover &__icon {
+    transform: translateX(4px);
+  }
 
-.button[disabled],
-.button--disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-  pointer-events: none;
+  &[disabled],
+  &--disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 }

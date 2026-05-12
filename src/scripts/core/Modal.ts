@@ -7,8 +7,11 @@ const CLOSE_ATTRIBUTE = "data-modal-close";
 
 /**
  * Универсальный класс модального окна.
- * Закрывается по крестику, по клику на оверлей и по Esc.
- * Блокирует скролл страницы при открытии.
+ *
+ * Закрывается по клику на крестик, по клику на фоновый оверлей и по клавише
+ * `Escape`. При открытии блокирует скролл страницы через `scrollLock` и
+ * передаёт фокус первому интерактивному элементу диалога. При закрытии
+ * возвращает фокус на элемент, с которого окно было открыто.
  */
 export class Modal {
 
@@ -26,6 +29,12 @@ export class Modal {
 
   private lastFocusedElement: HTMLElement | null = null;
 
+  /**
+   * Находит корневой элемент модалки и привязывает обработчики.
+   *
+   * @param rootSelector CSS-селектор корневого элемента.
+   * @param options Опции поведения модалки.
+   */
   public constructor(rootSelector: string, options: IModalOptions = {}) {
     this.root = queryRequired<HTMLElement>(rootSelector);
     this.closeOnOverlay = options.closeOnOverlay ?? true;
@@ -42,6 +51,9 @@ export class Modal {
     this.bindEvents();
   }
 
+  /**
+   * Открывает модалку, блокирует скролл и переводит фокус внутрь.
+   */
   public open(): void {
     if (this.isOpen) {
       return;
@@ -56,6 +68,9 @@ export class Modal {
     this.onOpen?.();
   }
 
+  /**
+   * Закрывает модалку, снимает блокировку скролла и возвращает фокус.
+   */
   public close(): void {
     if (!this.isOpen) {
       return;
@@ -69,6 +84,9 @@ export class Modal {
     this.onClose?.();
   }
 
+  /**
+   * Переключает состояние модалки: если открыта — закрывает, иначе открывает.
+   */
   public toggle(): void {
     if (this.isOpen) {
       this.close();
@@ -78,6 +96,11 @@ export class Modal {
     this.open();
   }
 
+  /**
+   * Возвращает корневой элемент модалки.
+   *
+   * @returns Корневой DOM-элемент диалога.
+   */
   public getRoot(): HTMLElement {
     return this.root;
   }

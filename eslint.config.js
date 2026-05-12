@@ -36,18 +36,5 @@ export default [
         console: "readonly",
       },
     },
-    rules: {
-      // Дисейблим JSDoc-обязаловку: лендинг-проект, JSDoc избыточен.
-      "jsdoc/require-jsdoc": "off",
-      "jsdoc/require-param-description": "off",
-      "jsdoc/require-returns": "off",
-      "jsdoc/require-returns-description": "off",
-      "jsdoc/require-param-type": "off",
-      "jsdoc/require-returns-type": "off",
-      // React-правила не нужны.
-      "react/jsx-uses-react": "off",
-      "react/react-in-jsx-scope": "off",
-      "react-refresh/only-export-components": "off",
-    },
   },
 ];

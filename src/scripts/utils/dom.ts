@@ -1,9 +1,9 @@
-
 /**
  * Возвращает массив элементов по селектору.
  *
- * @param selector CSS-селектор
- * @param parent контекст поиска (по умолчанию document)
+ * @param selector CSS-селектор.
+ * @param parent Контекст поиска (по умолчанию `document`).
+ * @returns Массив найденных элементов (пустой, если ничего не найдено).
  */
 export const queryAll = <TElement extends Element = HTMLElement>(
   selector: string,
@@ -12,12 +12,13 @@ export const queryAll = <TElement extends Element = HTMLElement>(
   return Array.from(parent.querySelectorAll<TElement>(selector));
 };
 
-
 /**
  * Возвращает элемент по селектору либо бросает исключение, если он не найден.
  *
- * @param selector CSS-селектор
- * @param parent контекст поиска (по умолчанию document)
+ * @param selector CSS-селектор.
+ * @param parent Контекст поиска (по умолчанию `document`).
+ * @returns Найденный DOM-элемент.
+ * @throws {Error} Если элемент по селектору не найден.
  */
 export const queryRequired = <TElement extends Element = HTMLElement>(
   selector: string,

@@ -1,22 +1,33 @@
-import type { IFieldRule, IValidationResult, TFieldName } from "../types/index.js";
+import type { IFieldRule, IFormValidator, IValidationResult } from "../types/index.js";
 import { isEmptyString } from "../utils/validators.js";
 
 const INVALID_CLASS = "form__field--invalid";
 
 /**
- * Кастомная валидация формы.
- * Не полагается на нативные браузерные подсказки и атрибут required.
+ * Кастомная валидация формы по списку правил.
+ *
+ * Не полагается на нативные браузерные подсказки и атрибут `required`,
+ * чтобы сообщения об ошибках можно было локализовать и стилизовать.
+ * Имена полей описаны обычными строками — класс не привязан к конкретной
+ * форме и может валидировать любую разметку, где поля помечены
+ * атрибутами `data-field` и `data-error-for`.
  */
-export class FormValidator {
+export class FormValidator implements IFormValidator {
 
   private readonly form: HTMLFormElement;
 
   private readonly rules: ReadonlyArray<IFieldRule>;
 
-  private readonly fieldElements: Map<TFieldName, HTMLElement> = new Map();
+  private readonly fieldElements: Map<string, HTMLElement> = new Map();
 
-  private readonly errorElements: Map<TFieldName, HTMLElement> = new Map();
+  private readonly errorElements: Map<string, HTMLElement> = new Map();
 
+  /**
+   * Кеширует DOM-узлы полей/ошибок и навешивает live-валидацию на инпуты.
+   *
+   * @param form Форма, к которой привязан валидатор.
+   * @param rules Список правил валидации полей.
+   */
   public constructor(form: HTMLFormElement, rules: ReadonlyArray<IFieldRule>) {
     this.form = form;
     this.rules = rules;
@@ -27,8 +38,13 @@ export class FormValidator {
     this.bindLiveValidation();
   }
 
+  /**
+   * Запускает валидацию всех полей сразу и применяет ошибки к DOM.
+   *
+   * @returns Результат валидации с флагом валидности и картой ошибок.
+   */
   public validate(): IValidationResult {
-    const errors = new Map<TFieldName, string>();
+    const errors = new Map<string, string>();
 
     for (const rule of this.rules) {
       const errorMessage = this.validateField(rule);
@@ -46,6 +62,9 @@ export class FormValidator {
     };
   }
 
+  /**
+   * Сбрасывает визуальное состояние ошибок на форме.
+   */
   public reset(): void {
     for (const fieldElement of this.fieldElements.values()) {
       fieldElement.classList.remove(INVALID_CLASS);
@@ -144,7 +163,7 @@ export class FormValidator {
     return null;
   }
 
-  private getControl(name: TFieldName): HTMLInputElement | HTMLTextAreaElement | null {
+  private getControl(name: string): HTMLInputElement | HTMLTextAreaElement | null {
     const element = this.form.elements.namedItem(name);
 
     if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) {
@@ -154,7 +173,7 @@ export class FormValidator {
     return null;
   }
 
-  private applyErrors(errors: Map<TFieldName, string>): void {
+  private applyErrors(errors: Map<string, string>): void {
     for (const rule of this.rules) {
       const message = errors.get(rule.name) ?? null;
 
@@ -162,7 +181,7 @@ export class FormValidator {
     }
   }
 
-  private applyFieldError(name: TFieldName, message: string | null): void {
+  private applyFieldError(name: string, message: string | null): void {
     const fieldElement = this.fieldElements.get(name);
     const errorElement = this.errorElements.get(name);
 

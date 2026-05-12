@@ -1,4 +1,4 @@
-.success {
+.error {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,18 +10,17 @@
     width: 72px;
     height: 72px;
     border-radius: 50%;
-    background-color: rgba(76, 195, 138, 0.16);
-    color: var(--color-success);
+    background-color: rgba(227, 85, 110, 0.16);
+    color: var(--color-error);
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    font-family: var(--font-base);
+    font-size: 36px;
+    font-weight: var(--fw-bold);
+    line-height: 1;
     margin-bottom: 8px;
-    animation: success-pop 480ms var(--ease-out);
-
-    & svg {
-      width: 36px;
-      height: 36px;
-    }
+    animation: error-pop 480ms var(--ease-out);
   }
 
   &__title {
@@ -38,12 +37,15 @@
     max-width: 360px;
   }
 
-  &__close {
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-top: 16px;
   }
 }
 
-@keyframes success-pop {
+@keyframes error-pop {
   0% {
     transform: scale(0.6);
     opacity: 0;

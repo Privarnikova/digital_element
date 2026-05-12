@@ -3,124 +3,124 @@
   color: var(--color-text-on-blue);
   padding: 56px 0 80px;
   margin-top: -1px;
-}
 
-.footer__top {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 48px;
-  align-items: start;
-  margin-bottom: 56px;
-}
-
-.footer__brand {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.footer__logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--color-text-on-blue);
-}
-
-.footer__logo-mark {
-  width: 40px;
-  height: 40px;
-}
-
-.footer__logo-name {
-  font-size: 1.75rem;
-  font-weight: var(--fw-semibold);
-  line-height: 1.643;
-  letter-spacing: 0.02em;
-}
-
-.footer__contacts {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.footer__contact {
-  display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: 12px;
-  align-items: start;
-  font-size: var(--fs-16);
-  color: var(--color-text-on-blue);
-  line-height: 1.625;
-  letter-spacing: 0.05em;
-}
-
-.footer__contact-key {
-  font-weight: var(--fw-semibold);
-  color: var(--color-text-on-blue);
-}
-
-.footer__contact-link {
-  color: var(--color-text-on-blue-muted);
-  transition: color var(--duration-fast) var(--ease-out);
-}
-
-.footer__contact-link:hover {
-  color: var(--color-text-on-blue);
-}
-
-.footer__column-title {
-  font-size: var(--fs-20);
-  font-weight: var(--fw-semibold);
-  color: var(--color-text-on-blue);
-  line-height: 1.5;
-  letter-spacing: 0.05em;
-  margin-bottom: 24px;
-}
-
-.footer__list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.footer__link {
-  font-size: var(--fs-16);
-  color: var(--color-text-on-blue);
-  line-height: 1.625;
-  letter-spacing: 0.05em;
-  transition: color var(--duration-fast) var(--ease-out);
-}
-
-.footer__link:hover {
-  color: var(--color-text-on-blue);
-}
-
-.footer__bottom {
-  font-size: var(--fs-16);
-  color: rgba(255, 255, 255, 0.4);
-  line-height: 1.625;
-  letter-spacing: 0.05em;
-}
-
-@media (max-width: 1023px) {
-  .footer__top {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
+  &__top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-bottom: 56px;
   }
 
-  .footer__brand {
-    grid-column: span 2;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer__top {
-    grid-template-columns: 1fr;
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
 
-  .footer__brand {
-    grid-column: span 1;
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-text-on-blue);
+  }
+
+  &__logo-mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  &__logo-name {
+    font-size: 1.75rem;
+    font-weight: var(--fw-semibold);
+    line-height: 1.643;
+    letter-spacing: 0.02em;
+  }
+
+  &__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__contact {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 12px;
+    align-items: start;
+    font-size: var(--fs-16);
+    color: var(--color-text-on-blue);
+    line-height: 1.625;
+    letter-spacing: 0.05em;
+  }
+
+  &__contact-key {
+    font-weight: var(--fw-semibold);
+    color: var(--color-text-on-blue);
+  }
+
+  &__contact-link {
+    color: var(--color-text-on-blue-muted);
+    transition: color var(--duration-fast) var(--ease-out);
+
+    &:hover {
+      color: var(--color-text-on-blue);
+    }
+  }
+
+  &__column-title {
+    font-size: var(--fs-20);
+    font-weight: var(--fw-semibold);
+    color: var(--color-text-on-blue);
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    margin-bottom: 24px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  &__link {
+    font-size: var(--fs-16);
+    color: var(--color-text-on-blue);
+    line-height: 1.625;
+    letter-spacing: 0.05em;
+    transition: color var(--duration-fast) var(--ease-out);
+
+    &:hover {
+      color: var(--color-text-on-blue);
+    }
+  }
+
+  &__bottom {
+    font-size: var(--fs-16);
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.625;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 1023px) {
+    &__top {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    &__brand {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    &__top {
+      grid-template-columns: 1fr;
+    }
+
+    &__brand {
+      grid-column: span 1;
+    }
   }
 }
